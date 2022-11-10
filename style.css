@@ -2,19 +2,20 @@ body {
     font-family: 'Roboto';
     font-style: normal;
     font-size: 40px;
-    margin: 10px;
+    background-color: #F5F8FA;
 }
 
 header {
-    /* position: sticky; */
+    position: sticky;
+    top: 0;
     height: 180px;
+    width: 100%;
     display: flex;
     background-color: #E9F0F4;
     padding-left: 100px;
 }
 
 .title {
-    position: sticky;
     font-weight: 500;
     font-size: 40px;
     color: #455266;
@@ -25,6 +26,7 @@ header {
 .new-task-button {
     font-weight: 500;
     font-size: 16px;
+    color: #455266;
     background: #E9FFE3;
     border: none;
     border-radius: 4px;
@@ -32,38 +34,38 @@ header {
     width: 250px;
     height: 43px;
     cursor: pointer;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .tasks-block {
     display: flex;
-    flex-flow: row wrap;
-    background-color: #F5F8FA;
-    padding: 40px 50px 24px 100px;
+    justify-content: space-between;
+    /* flex-flow: row wrap; */
+    padding: 50px 100px;
 }
 
-/* @media (max-width: 800px) {
-    .flex-container {
+@media (max-width: 800px) {
+    .tasks-block {
       flex-direction: column;
     }
-  } */
+  }
 
 .task-title {
     height: 19px;
+    width: 200px;
     font-weight: 700;
     font-size: 16px;
     text-transform: uppercase;
     color: #455266;
-    padding-bottom: 15px;
+    padding-bottom: 20px;
 }
 
 .task {
     color: #455266;
-    width: 300px;
-    height: 189px;
+    width: 310px;
     background: #FFFFFF;
     border: 1px solid #EEEEEE;
     border-radius: 10px;
-    margin-right: 50px;
     padding: 20px;
 }
 
@@ -76,19 +78,12 @@ header {
 .task-discription {
     font-weight: 400;
     font-size: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #EEEEEE;
     margin-bottom: 10px;
 }
 
-.border {
-    background: #EEEEEE;
-    width: 268px;
-    height: 1px;
-    margin-bottom: 10px;
-}
-
-.task-assigned,
-.task-priority,
-.task-date {
+.task-parameter {
     font-weight: 700;
     font-size: 12px;
     margin-bottom: 10px;

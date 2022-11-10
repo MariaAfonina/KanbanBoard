@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KanbanBoard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,53 +15,82 @@
         <button class="new-task-button">Create a New Task</button>
     </header>
 
-    <div class="tasks-block">
+    <main class="tasks-block">
 
-        <div class="backlog">
+        <div>
             <h2 class="task-title">BackLog</h2>
             <div class="task">
                 <div class="wrapper-button-close">
-                    <div class="task-name">Tast title</div>
+                    <ul class="task-name">Tast title</ul>
                     <button class="button-close">X</button>
                 </div>
-                <div class="task-discription">Task discription</div>
-                <div class="border"></div>
-                <div class="task-assigned">Assigned:</div>
-                <div class="task-priority">Priority:</div>
-                <div class="task-date">Due Date:</div>
+                <ul class="task-discription">Task discription</ul>
+                <ul class="task-parameter">Assigned:</ul>
+                <ul class="task-parameter">Priority:</ul>
+                <ul class="task-parameter">Due Date:</ul>
             </div>
         </div>
 
-        <div class="in-progress">
+        <div>
             <h2 class="task-title">In progress</h2>
             <div class="task">
                 <div class="wrapper-button-close">
-                    <div class="task-name">Tast title</div>
+                    <ul class="task-name">Tast title</ul>
                     <button class="button-close">X</button>
                 </div>
-                <div class="task-discription">Task discription</div>
-                <div class="border"></div>
-                <div class="task-assigned">Assigned:</div>
-                <div class="task-priority">Priority:</div>
-                <div class="task-date">Due Date:</div>
+                <ul class="task-discription">Task discription</ul>
+                <ul class="task-parameter">Assigned:</ul>
+                <ul class="task-parameter">Priority:</ul>
+                <ul class="task-parameter">Due Date:</ul>
             </div>
+
+            <div class="task">
+              <div class="wrapper-button-close">
+                  <ul class="task-name">Tast title</ul>
+                  <button class="button-close">X</button>
+              </div>
+              <ul class="task-discription">Task discription</ul>
+              <ul class="task-parameter">Assigned:</ul>
+              <ul class="task-parameter">Priority:</ul>
+              <ul class="task-parameter">Due Date:</ul>
+          </div>
+          <div class="task">
+            <div class="wrapper-button-close">
+                <ul class="task-name">Tast title</ul>
+                <button class="button-close">X</button>
+            </div>
+            <ul class="task-discription">Task discription</ul>
+            <ul class="task-parameter">Assigned:</ul>
+            <ul class="task-parameter">Priority:</ul>
+            <ul class="task-parameter">Due Date:</ul>
         </div>
 
-        <div class="done">
+        <div class="task">
+          <div class="wrapper-button-close">
+              <ul class="task-name">Tast title</ul>
+              <button class="button-close">X</button>
+          </div>
+          <ul class="task-discription">Task discription</ul>
+          <ul class="task-parameter">Assigned:</ul>
+          <ul class="task-parameter">Priority:</ul>
+          <ul class="task-parameter">Due Date:</ul>
+      </div>
+          
+        </div>
+
+        <div>
             <h2 class="task-title">Done</h2>
             <div class="task">
                 <div class="wrapper-button-close">
-                    <div class="task-name">Tast title</div>
+                    <ul class="task-name">Tast title</ul>
                     <button class="button-close">X</button>
                 </div>
-                <div class="task-discription">Task discription</div>
-                <div class="border"></div>
-                <div class="task-assigned">Assigned:</div>
-                <div class="task-priority">Priority:</div>
-                <div class="task-date">Due Date:</div>
+                <ul class="task-discription">Task discription</ul>
+                <ul class="task-parameter">Assigned:</ul>
+                <ul class="task-parameter">Priority:</ul>
+                <ul class="task-parameter">Due Date:</ul>
             </div>
         </div>
-        
-    </div>
+    </main>
 </body>
 </html>
