@@ -1,106 +1,107 @@
 body {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-size: 40px;
-    background-color: #F5F8FA;
+	font-family: 'Roboto';
+	font-style: normal;
+	background-color: #F5F8FA;
 }
 
 header {
-    position: sticky;
-    top: 0;
-    height: 180px;
-    width: 100%;
-    display: flex;
-    background-color: #E9F0F4;
-    padding-left: 100px;
+	position: sticky;
+	top: 0;
+	height: 180px;
+	display: flex;
+	background-color: #E9F0F4;
+	padding-left: 100px;
 }
 
 .title {
-    font-weight: 500;
-    font-size: 40px;
-    color: #455266;
-    margin-top: 70px;
-    margin-right: 65px;
+	font-weight: 500;
+	font-size: 40px;
+	color: #455266;
+	margin-top: 70px;
+	margin-right: 65px;
 }
 
 .new-task-button {
-    font-weight: 500;
-    font-size: 16px;
-    color: #455266;
-    background: #E9FFE3;
-    border: none;
-    border-radius: 4px;
-    margin-top: 70px;
-    width: 250px;
-    height: 43px;
-    cursor: pointer;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+	font-weight: 500;
+	font-size: 16px;
+	color: #455266;
+	background: #E9FFE3;
+	border: none;
+	border-radius: 4px;
+	margin-top: 70px;
+	width: 250px;
+	height: 43px;
+	cursor: pointer;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .tasks-block {
-    display: flex;
-    justify-content: space-between;
-    /* flex-flow: row wrap; */
-    padding: 50px 100px;
+	display: flex;
+	justify-content: space-between;
+	padding: 50px 100px;
 }
 
-@media (max-width: 800px) {
-    .tasks-block {
-      flex-direction: column;
-    }
-  }
+@media (min-width: 600px) and (max-width: 1024px) {
+	.tasks-block {
+	  flex-wrap: wrap;
+	}
+}
+
+@media (max-width: 599px) {
+	.tasks-block {
+		flex-direction: column;
+	}
+}
 
 .task-title {
-    height: 19px;
-    width: 200px;
-    font-weight: 700;
-    font-size: 16px;
-    text-transform: uppercase;
-    color: #455266;
-    padding-bottom: 20px;
+	height: 19px;
+	font-weight: 700;
+	font-size: 16px;
+	text-transform: uppercase;
+	color: #455266;
 }
 
 .task {
-    color: #455266;
-    width: 310px;
-    background: #FFFFFF;
-    border: 1px solid #EEEEEE;
-    border-radius: 10px;
-    padding: 20px;
+	color: #455266;
+	width: 310px;
+	background: #FFFFFF;
+	border: 1px solid #EEEEEE;
+	border-radius: 10px;
+	padding: 20px;
 }
 
 .task-name {
-    font-weight: 700;
-    font-size: 16px;
-    margin-bottom: 7px;
+	font-weight: 700;
+	font-size: 16px;
+	margin-bottom: 7px;
 }
 
 .task-discription {
-    font-weight: 400;
-    font-size: 12px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #EEEEEE;
-    margin-bottom: 10px;
+	font-weight: 400;
+	font-size: 12px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #EEEEEE;
+	margin-bottom: 10px;
 }
 
 .task-parameter {
-    font-weight: 700;
-    font-size: 12px;
-    margin-bottom: 10px;
+	font-weight: 700;
+	font-size: 12px;
+	margin-bottom: 10px;
 }
 
 .wrapper-button-close {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .button-close {
-    font-weight: 700;
-    font-size: 16px;
-    color: #A80F0F;
-    background: none;
-    border: none;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
+	font-weight: 700;
+	font-size: 16px;
+	color: #A80F0F;
+	background: none;
+	border: none;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
 }
