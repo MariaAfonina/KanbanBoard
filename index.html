@@ -1,98 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>KanbanBoard</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/44839b741d.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
     <header>
-        <h1 class="title">Kanban Board</h1>
-        <button class="new-task-button">Create a New Task</button>
+      <h1 class="title">Kanban Board</h1>
+      <button class="all-btn new-task-button">Create a New Task</button>
     </header>
 
     <main class="tasks-block">
+      <div>
+        <h2 class="task-title">BackLog</h2>
+        <ul class="task">
+          <div class="btn-close-wrapper">
+            <li class="task-name">Tast title</li>
+            <button class="button-close">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
 
-        <div class="backlog">
-            <h2 class="task-title">BackLog</h2>
-            <div class="task">
-                <div class="wrapper-button-close">
-                    <ul class="task-name">Tast title</ul>
-                    <button class="button-close">X</button>
-                </div>
-                <ul class="task-discription">Task discription</ul>
-                <ul class="task-parameter">Assigned:</ul>
-                <ul class="task-parameter">Priority:</ul>
-                <ul class="task-parameter">Due Date:</ul>
-            </div>
-        </div>
-        
-        <div class="in-progress">
-            <h2 class="task-title">In progress</h2>
+          <li class="task-discription">Task discription</li>
+          <div class="task-wrapper">
+            <li class="task-parameter">Assigned:</li>
+            <img
+              src="smiley.svg.webp"
+              alt="Assigned photo"
+              class="assigned-img"
+            />
+            <li class="assigned-value">John Doe</li>
+          </div>
+          <div class="task-wrapper">
+            <li class="task-parameter">Priority:</li>
+            <li class="priority-value">Low</li>
+          </div>
+          <div class="task-wrapper">
+            <li class="task-parameter">Due Date:</li>
+            <li class="date-value">11/11/2022</li>
+          </div>
 
-            <div class="task">
-                <div class="wrapper-button-close">
-                    <ul class="task-name">Tast title</ul>
-                    <button class="button-close">X</button>
-                </div>
-                <ul class="task-discription">Task discription</ul>
-                <ul class="task-parameter">Assigned:</ul>
-                <ul class="task-parameter">Priority:</ul>
-                <ul class="task-parameter">Due Date:</ul>
-            </div>
+          <div class="tag-edit-wrapper">
+            <button class="btn-tag">+Tag</button>
+            <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
+          </div>
+        </ul>
+      </div>
 
-            <div class="task">
-                <div class="wrapper-button-close">
-                    <ul class="task-name">Tast title</ul>
-                    <button class="button-close">X</button>
-                </div>
-                <ul class="task-discription">Task discription</ul>
-                <ul class="task-parameter">Assigned:</ul>
-                <ul class="task-parameter">Priority:</ul>
-                <ul class="task-parameter">Due Date:</ul>
-            </div>
+      <div>
+        <h2 class="task-title">In progress</h2>
 
-            <div class="task">
-                <div class="wrapper-button-close">
-                    <ul class="task-name">Tast title</ul>
-                    <button class="button-close">X</button>
-                </div>
-                <ul class="task-discription">Task discription</ul>
-                <ul class="task-parameter">Assigned:</ul>
-                <ul class="task-parameter">Priority:</ul>
-                <ul class="task-parameter">Due Date:</ul>
-            </div>
+        <ul class="task">
+          <div class="btn-close-wrapper">
+            <li class="task-name">Tast title</li>
+            <button class="button-close">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          <li class="task-discription">Task discription</li>
+          <div class="task-wrapper">
+            <li class="task-parameter">Assigned:</li>
+            <img
+              src="smiley.svg.webp"
+              alt="Assigned photo"
+              class="assigned-img"
+            />
+            <li class="assigned-value">John Doe</li>
+          </div>
+          <div class="task-wrapper">
+            <li class="task-parameter">Priority:</li>
+            <li class="priority-value">Low</li>
+          </div>
+          <div class="task-wrapper">
+            <li class="task-parameter">Due Date:</li>
+            <li class="date-value">11/11/2022</li>
+          </div>
+          <div class="tag-edit-wrapper">
+            <button class="btn-tag">+Tag</button>
+            <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
+          </div>
+        </ul>
 
-            <div class="task">
-                <div class="wrapper-button-close">
-                    <ul class="task-name">Tast title</ul>
-                    <button class="button-close">X</button>
-                </div>
-                <ul class="task-discription">Task discription</ul>
-                <ul class="task-parameter">Assigned:</ul>
-                <ul class="task-parameter">Priority:</ul>
-                <ul class="task-parameter">Due Date:</ul>
-            </div>
-        </div>
+        <ul class="task">
+          <div class="btn-close-wrapper">
+            <li class="task-name">Tast title</li>
+            <button class="button-close">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          <li class="task-discription">Task discription</li>
+          <div class="task-wrapper">
+            <li class="task-parameter">Assigned:</li>
+            <img
+              src="smiley.svg.webp"
+              alt="Assigned photo"
+              class="assigned-img"
+            />
+            <li class="assigned-value">John Doe</li>
+          </div>
+          <div class="task-wrapper">
+            <li class="task-parameter">Priority:</li>
+            <li class="priority-value">Low</li>
+          </div>
+          <div class="task-wrapper">
+            <li class="task-parameter">Due Date:</li>
+            <li class="date-value">11/11/2022</li>
+          </div>
+          <div class="tag-edit-wrapper">
+            <button class="btn-tag">+Tag</button>
+            <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
+          </div>
+        </ul>
+      </div>
 
-        <div class="done">
-            <h2 class="task-title">Done</h2>
-            <div class="task">
-                <div class="wrapper-button-close">
-                    <ul class="task-name">Tast title</ul>
-                    <button class="button-close">X</button>
-                </div>
-                <ul class="task-discription">Task discription</ul>
-                <ul class="task-parameter">Assigned:</ul>
-                <ul class="task-parameter">Priority:</ul>
-                <ul class="task-parameter">Due Date:</ul>
-            </div>
-        </div>
-        
+      <div>
+        <h2 class="task-title">Done</h2>
+        <ul class="task">
+          <div class="btn-close-wrapper">
+            <li class="task-name">Tast title</li>
+            <button class="button-close">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <li class="task-discription">Task discription</li>
+          <div class="task-wrapper">
+            <li class="task-parameter">Assigned:</li>
+            <img
+              src="smiley.svg.webp"
+              alt="Assigned photo"
+              class="assigned-img"
+            />
+            <li class="assigned-value">John Doe</li>
+          </div>
+          <div class="task-wrapper">
+            <li class="task-parameter">Priority:</li>
+            <li class="priority-value">Low</li>
+          </div>
+          <div class="task-wrapper">
+            <li class="task-parameter">Due Date:</li>
+            <li class="date-value">11/11/2022</li>
+          </div>
+          <div class="tag-edit-wrapper">
+            <button class="btn-tag">+Tag</button>
+            <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
+          </div>
+        </ul>
+      </div>
     </main>
-</body>
+
+    <div class="add-form-wrapper">
+      <form class="add-form">
+        <div class="btn-close-wrapper">
+          <h2 class="add-form-title">Add a New Task</h2>
+          <button class="button-close">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <label class="add-form-parameter">Task title</label>
+        <input type="text" class="add-form-input" />
+
+        <label class="add-form-parameter">Task discription</label>
+        <input type="text" class="add-form-input" />
+
+        <label class="add-form-parameter">Assignee</label>
+        <div class="dropdown-wrapper">
+          <button class="btn-icon-arrow">
+            <i class="icon-arrow fa-solid fa-caret-down"></i>
+          </button>
+          <ul class="dropdown-assignee">
+            <li>Jane Doe</li>
+            <li>John Doe</li>
+          </ul>
+        </div>
+
+        <label class="add-form-parameter">Priority</label>
+        <div class="dropdown-wrapper">
+          <button class="btn-icon-arrow">
+            <i class="fa-solid fa-caret-down"></i>
+          </button>
+          <ul class="dropdown-priority">
+            <li>High</li>
+            <li>Medium</li>
+            <li>Low</li>
+          </ul>
+        </div>
+
+        <label class="add-form-parameter">Due Date</label>
+        <input type="date" class="add-form-date" />
+
+        <div class="form-button-wrapper">
+          <button class="all-btn cancel-button">Cancel</button>
+          <button class="all-btn add-button">Add</button>
+        </div>
+      </form>
+    </div>
+  </body>
 </html>
