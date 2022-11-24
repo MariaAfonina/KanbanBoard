@@ -87,7 +87,8 @@ header {
 
 .task-wrapper {
   display: flex;
-  margin-bottom: 13px;
+  margin-bottom: 10px;
+  align-items: center;
 }
 
 .button-close {
@@ -120,8 +121,7 @@ header {
   color: #0eacc1;
   font-weight: 700;
   font-size: 12px;
-  width: 39px;
-  height: 18px;
+  padding: 2px 8px;
   background: rgba(14, 172, 193, 0.1);
   border-radius: 100px;
   text-align: center;
@@ -189,7 +189,6 @@ header {
 .add-form-input {
   width: 264px;
   height: 26px;
-
   background: #ffffff;
   border: 1px solid #eeeeee;
   border-radius: 5px;
@@ -205,7 +204,6 @@ header {
 }
 
 .dropdown-wrapper {
-  position: relative;
   width: 182px;
   height: 26px;
   background: #ffffff;
@@ -213,29 +211,42 @@ header {
   border-radius: 5px;
 }
 
-.dropdown-assignee {
+.dropdown-wrapper li {
+  font-weight: bold;
+  position: relative;
+  cursor: pointer;
+}
+
+.dropdown-wrapper:hover ul {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dropdown-value {
   position: absolute;
+  background: #ffffff;
   color: #455266;
   font-weight: 400;
   font-size: 12px;
   width: 182px;
-  height: 96px;
-  padding-top: 10px;
-  background: #ffffff;
   border: 1px solid #eeeeee;
   border-radius: 0px 0px 5px 5px;
+  display: flex;
+  flex-direction: column;
   opacity: 0;
-  transition: 0.5s;
-  left: 0px;
-  top: 100%;
+  visibility: hidden;
+  transition: 0.4s opacity ease-in-out;
 }
 
-.dropdown-wrapper:hover .dropdown-assignee {
-  opacity: 1;
+.dropdown-value li {
+  padding: 0.5rem 0.7rem;
+  border-radius: 8px;
+  transition: 0.4s ease-in-out;
 }
 
-.dropdown-assignee li {
-  padding-bottom: 15px;
+.dropdown-value li:hover {
+  background: #455266;
+  color: white;
 }
 
 .add-form-date {
