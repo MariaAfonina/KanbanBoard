@@ -12,11 +12,14 @@
       src="https://kit.fontawesome.com/44839b741d.js"
       crossorigin="anonymous"
     ></script>
+    <script src="script.js"></script>
   </head>
   <body>
     <header>
       <h1 class="title">Kanban Board</h1>
-      <button class="all-btn new-task-button">Create a New Task</button>
+      <button class="all-btn new-task-button" onclick="openModal()">
+        Create a New Task
+      </button>
     </header>
 
     <main class="tasks-block">
@@ -158,20 +161,20 @@
       </div>
     </main>
 
-    <div class="add-form-wrapper">
+    <div id="form" class="add-form-wrapper">
       <form class="add-form">
-        <div class="btn-close-wrapper">
-          <h2 class="add-form-title">Add a New Task</h2>
-          <button class="button-close">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
+        <h2 class="add-form-title">Add a New Task</h2>
+        <button class="button-close form-btn-close" onclick="closeModal()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
 
-        <label class="add-form-parameter">Task title</label>
-        <input type="text" class="add-form-input" />
+        <label class="add-form-parameter" for="title">Task title</label>
+        <input type="text" class="add-form-input" id="title" />
 
-        <label class="add-form-parameter">Task discription</label>
-        <input type="text" class="add-form-input" />
+        <label class="add-form-parameter" for="discription"
+          >Task discription</label
+        >
+        <input type="text" class="add-form-input" id="discription" />
 
         <label class="add-form-parameter">Assignee</label>
         <div class="dropdown-wrapper">
@@ -204,14 +207,14 @@
             <i class="fa-solid fa-caret-down"></i>
           </button>
           <ul class="dropdown-value">
-            <li>High</li>
-            <li>Medium</li>
-            <li>Low</li>
+            <li class="high">High</li>
+            <li class="medium">Medium</li>
+            <li class="low">Low</li>
           </ul>
         </div>
 
-        <label class="add-form-parameter">Due Date</label>
-        <input type="date" class="add-form-date" />
+        <label class="add-form-parameter" for="date">Due Date</label>
+        <input type="date" class="add-form-date" id="date" />
 
         <div class="form-button-wrapper">
           <button class="all-btn cancel-button">Cancel</button>
