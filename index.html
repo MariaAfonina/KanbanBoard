@@ -6,29 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>KanbanBoard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
     <script
       src="https://kit.fontawesome.com/44839b741d.js"
       crossorigin="anonymous"
     ></script>
-    <script src="script.js"></script>
   </head>
   <body>
     <header>
       <h1 class="title">Kanban Board</h1>
-      <button class="all-btn new-task-button" onclick="openModal()">
+      <button id="btn-add-new-task" class="all-btn new-task-button">
         Create a New Task
       </button>
     </header>
 
     <main class="tasks-block">
-      <div>
+      <div id="back-log">
         <h2 class="task-title">BackLog</h2>
+
         <ul class="task">
           <div class="btn-close-wrapper">
             <li class="task-name">Tast title</li>
-            <button class="button-close">
+            <button id="delete-task" class="button-close">
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
@@ -43,10 +48,12 @@
             />
             <li class="assigned-value">John Doe</li>
           </div>
+
           <div class="task-wrapper">
             <li class="task-parameter">Priority:</li>
             <li class="priority-value">Low</li>
           </div>
+
           <div class="task-wrapper">
             <li class="task-parameter">Due Date:</li>
             <li class="date-value">11/11/2022</li>
@@ -65,38 +72,7 @@
         <ul class="task">
           <div class="btn-close-wrapper">
             <li class="task-name">Tast title</li>
-            <button class="button-close">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-          <li class="task-discription">Task discription</li>
-          <div class="task-wrapper">
-            <li class="task-parameter">Assigned:</li>
-            <img
-              src="img/smiley.svg.webp"
-              alt="Assigned photo"
-              class="assigned-img"
-            />
-            <li class="assigned-value">John Doe</li>
-          </div>
-          <div class="task-wrapper">
-            <li class="task-parameter">Priority:</li>
-            <li class="priority-value">Low</li>
-          </div>
-          <div class="task-wrapper">
-            <li class="task-parameter">Due Date:</li>
-            <li class="date-value">11/11/2022</li>
-          </div>
-          <div class="tag-edit-wrapper">
-            <button class="btn-tag">+Tag</button>
-            <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
-          </div>
-        </ul>
-
-        <ul class="task">
-          <div class="btn-close-wrapper">
-            <li class="task-name">Tast title</li>
-            <button class="button-close">
+            <button id="delete-task" class="button-close">
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
@@ -127,10 +103,11 @@
 
       <div>
         <h2 class="task-title">Done</h2>
+
         <ul class="task">
           <div class="btn-close-wrapper">
             <li class="task-name">Tast title</li>
-            <button class="button-close">
+            <button id="delete-task" class="button-close">
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
@@ -164,7 +141,7 @@
     <div id="form" class="add-form-wrapper">
       <form class="add-form">
         <h2 class="add-form-title">Add a New Task</h2>
-        <button class="button-close form-btn-close" onclick="closeModal()">
+        <button id="close-modal" class="button-close form-btn-close">
           <i class="fa-solid fa-xmark"></i>
         </button>
 
@@ -176,13 +153,15 @@
         >
         <input type="text" class="add-form-input" id="discription" />
 
-        <label class="add-form-parameter">Assignee</label>
-        <div class="dropdown-wrapper">
+        <label class="add-form-parameter" for="assigned-wrapper"
+          >Assignee</label
+        >
+        <div id="assigned-wrapper" class="dropdown-wrapper">
           <button class="btn-icon-arrow">
             <i class="icon-arrow fa-solid fa-caret-down"></i>
           </button>
           <ul class="dropdown-value">
-            <li>
+            <li id="Jane_Doe">
               <img
                 src="img/smiley.svg.webp"
                 alt="Assigned photo"
@@ -190,7 +169,7 @@
               />
               Jane Doe
             </li>
-            <li>
+            <li id="John_Doe">
               <img
                 src="img/smiley.svg.webp"
                 alt="Assigned photo"
@@ -201,8 +180,10 @@
           </ul>
         </div>
 
-        <label class="add-form-parameter">Priority</label>
-        <div class="dropdown-wrapper">
+        <label class="add-form-parameter" for="priority-wrapper"
+          >Priority</label
+        >
+        <div id="priority-wrapper" class="dropdown-wrapper">
           <button class="btn-icon-arrow">
             <i class="fa-solid fa-caret-down"></i>
           </button>
@@ -214,13 +195,14 @@
         </div>
 
         <label class="add-form-parameter" for="date">Due Date</label>
-        <input type="date" class="add-form-date" id="date" />
+        <input type="date" id="date" class="add-form-date" />
 
         <div class="form-button-wrapper">
           <button class="all-btn cancel-button">Cancel</button>
-          <button class="all-btn add-button">Add</button>
+          <button id="add-btn-form" class="all-btn add-button">Add</button>
         </div>
       </form>
     </div>
   </body>
+  <script src="script.js"></script>
 </html>

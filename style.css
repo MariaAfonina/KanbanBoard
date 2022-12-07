@@ -237,6 +237,7 @@ header {
 }
 
 .dropdown-wrapper:hover ul {
+  z-index: 1;
   opacity: 1;
   visibility: visible;
 }
@@ -291,7 +292,7 @@ header {
 }
 
 .add-form-date {
-  width: 30%;
+  width: 50%;
   color: #455266;
   font-weight: 700;
   font-size: 12px;
