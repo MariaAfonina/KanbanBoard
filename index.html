@@ -30,111 +30,111 @@
       <div id="back-log">
         <h2 class="task-title">BackLog</h2>
 
-        <ul class="task">
+        <div class="task">
           <div class="btn-close-wrapper">
-            <li class="task-name">Tast title</li>
-            <button id="delete-task" class="button-close">
+            <div class="task-name">Tast title</div>
+            <button class="button-close">
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
 
-          <li class="task-discription">Task discription</li>
+          <div class="task-discription">Task discription</div>
           <div class="task-wrapper">
-            <li class="task-parameter">Assigned:</li>
+            <div class="task-parameter">Assigned:</div>
             <img
               src="img/smiley.svg.webp"
               alt="Assigned photo"
               class="assigned-img"
             />
-            <li class="assigned-value">John Doe</li>
+            <div class="assigned-value">John Doe</div>
           </div>
 
           <div class="task-wrapper">
-            <li class="task-parameter">Priority:</li>
-            <li class="priority-value">Low</li>
+            <div class="task-parameter">Priority:</div>
+            <div class="priority-value">Low</div>
           </div>
 
           <div class="task-wrapper">
-            <li class="task-parameter">Due Date:</li>
-            <li class="date-value">11/11/2022</li>
+            <div class="task-parameter">Due Date:</div>
+            <div class="date-value">11/11/2022</div>
           </div>
 
           <div class="tag-edit-wrapper">
             <button class="btn-tag">+Tag</button>
             <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
           </div>
-        </ul>
+        </div>
       </div>
 
       <div>
         <h2 class="task-title">In progress</h2>
 
-        <ul class="task">
+        <div class="task">
           <div class="btn-close-wrapper">
-            <li class="task-name">Tast title</li>
-            <button id="delete-task" class="button-close">
+            <div class="task-name">Tast title</div>
+            <button class="button-close">
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
-          <li class="task-discription">Task discription</li>
+          <div class="task-discription">Task discription</div>
           <div class="task-wrapper">
-            <li class="task-parameter">Assigned:</li>
+            <div class="task-parameter">Assigned:</div>
             <img
               src="img/smiley.svg.webp"
               alt="Assigned photo"
               class="assigned-img"
             />
-            <li class="assigned-value">John Doe</li>
+            <div class="assigned-value">John Doe</div>
           </div>
           <div class="task-wrapper">
-            <li class="task-parameter">Priority:</li>
-            <li class="priority-value">Low</li>
+            <div class="task-parameter">Priority:</div>
+            <div class="priority-value">Low</div>
           </div>
           <div class="task-wrapper">
-            <li class="task-parameter">Due Date:</li>
-            <li class="date-value">11/11/2022</li>
+            <div class="task-parameter">Due Date:</div>
+            <div class="date-value">11/11/2022</div>
           </div>
           <div class="tag-edit-wrapper">
             <button class="btn-tag">+Tag</button>
             <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
           </div>
-        </ul>
+        </div>
       </div>
 
       <div>
         <h2 class="task-title">Done</h2>
 
-        <ul class="task">
+        <div class="task">
           <div class="btn-close-wrapper">
-            <li class="task-name">Tast title</li>
-            <button id="delete-task" class="button-close">
+            <div class="task-name">Tast title</div>
+            <button class="button-close">
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
 
-          <li class="task-discription">Task discription</li>
+          <div class="task-discription">Task discription</div>
           <div class="task-wrapper">
-            <li class="task-parameter">Assigned:</li>
+            <div class="task-parameter">Assigned:</div>
             <img
               src="img/smiley.svg.webp"
               alt="Assigned photo"
               class="assigned-img"
             />
-            <li class="assigned-value">John Doe</li>
+            <div class="assigned-value">John Doe</div>
           </div>
           <div class="task-wrapper">
-            <li class="task-parameter">Priority:</li>
-            <li class="priority-value">Low</li>
+            <div class="task-parameter">Priority:</div>
+            <div class="priority-value">Low</div>
           </div>
           <div class="task-wrapper">
-            <li class="task-parameter">Due Date:</li>
-            <li class="date-value">11/11/2022</li>
+            <div class="task-parameter">Due Date:</div>
+            <div class="date-value">11/11/2022</div>
           </div>
           <div class="tag-edit-wrapper">
             <button class="btn-tag">+Tag</button>
             <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
           </div>
-        </ul>
+        </div>
       </div>
     </main>
 
@@ -153,15 +153,13 @@
         >
         <input type="text" class="add-form-input" id="discription" />
 
-        <label class="add-form-parameter" for="assigned-wrapper"
-          >Assignee</label
-        >
+        <label class="add-form-parameter">Assignee</label>
         <div id="assigned-wrapper" class="dropdown-wrapper">
           <button class="btn-icon-arrow">
             <i class="icon-arrow fa-solid fa-caret-down"></i>
           </button>
           <ul class="dropdown-value">
-            <li id="Jane_Doe">
+            <li data-name="Jane Doe" class="name-value">
               <img
                 src="img/smiley.svg.webp"
                 alt="Assigned photo"
@@ -169,7 +167,7 @@
               />
               Jane Doe
             </li>
-            <li id="John_Doe">
+            <li data-name="John Doe" class="name-value">
               <img
                 src="img/smiley.svg.webp"
                 alt="Assigned photo"
@@ -180,17 +178,15 @@
           </ul>
         </div>
 
-        <label class="add-form-parameter" for="priority-wrapper"
-          >Priority</label
-        >
+        <label class="add-form-parameter">Priority</label>
         <div id="priority-wrapper" class="dropdown-wrapper">
           <button class="btn-icon-arrow">
             <i class="fa-solid fa-caret-down"></i>
           </button>
           <ul class="dropdown-value">
-            <li class="high">High</li>
-            <li class="medium">Medium</li>
-            <li class="low">Low</li>
+            <li data-name="High" class="high priority">High</li>
+            <li data-name="Medium" class="medium priority">Medium</li>
+            <li data-name="Low" class="low priority">Low</li>
           </ul>
         </div>
 
