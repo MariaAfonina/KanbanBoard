@@ -116,6 +116,7 @@ function saveNewTask(e) {
 
   localStorage.setItem("tasksBackLog", JSON.stringify(tasks));
 
+<<<<<<< HEAD
   for (let i = id; i < tasks.length; i++) {
     const markup = `<div class="task">
       <div class="btn-close-wrapper">
@@ -151,6 +152,43 @@ function saveNewTask(e) {
         <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
       </div>
     </div>`;
+=======
+  for (let i = 0; i < tasks.length; i++) {
+    const markup = `<div class="task">
+    <div class="btn-close-wrapper">
+      <div class="task-name">${tasks[i].taskTitle}</div>
+      <button id="delete-task" class="button-close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="task-discription">${tasks[i].taskDiscription}</div>
+    <div class="task-wrapper">
+      <div class="task-parameter">Assigned:</div>
+      <img
+        src="img/smiley.svg.webp"
+        alt="Assigned photo"
+        class="assigned-img"
+      />
+      <div class="assigned-value">${tasks[i].assigned}</div>
+    </div>
+
+    <div class="task-wrapper">
+      <div class="task-parameter">Priority:</div>
+      <div class="priority-value">${tasks[i].priority}</div>
+    </div>
+
+    <div class="task-wrapper">
+      <div class="task-parameter">Due Date:</div>
+      <div class="date-value">${tasks[i].date}</div>
+    </div>
+
+    <div class="tag-edit-wrapper">
+      <button class="btn-tag">+Tag</button>
+      <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
+    </div>
+  </div>`;
+>>>>>>> eab853fb9573c590a480f4e16251b4e1d6e15edc
 
     const backLog = document.getElementById("back-log");
     backLog.innerHTML += markup;
@@ -161,12 +199,15 @@ function saveNewTask(e) {
 
 // Delete Task
 
+<<<<<<< HEAD
 const deleteBtn = document.querySelectorAll(".btn-close-wrapper .button-close");
 
 deleteBtn.forEach((el) => el.addEventListener("click", deleteTask));
 
 function deleteTask() {}
 
+=======
+>>>>>>> eab853fb9573c590a480f4e16251b4e1d6e15edc
 // Open dropdown with click
 
 // const dropDownPriority = document.getElementById("priority-wrapper");
