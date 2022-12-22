@@ -1,3 +1,55 @@
+document.addEventListener("DOMContentLoaded", activeTasks);
+
+const getTasks = localStorage.getItem("tasksBackLog");
+let tasks;
+let id;
+
+function activeTasks() {
+  tasks = JSON.parse(getTasks);
+
+  if (getTasks !== null) {
+    for (let i = 0; i < tasks.length; i++) {
+      const markup = `<div class="task">
+      <div class="btn-close-wrapper">
+        <div class="task-name">${tasks[i].taskTitle}</div>
+        <button id="delete-task" class="button-close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="task-discription">${tasks[i].taskDiscription}</div>
+      <div class="task-wrapper">
+        <div class="task-parameter">Assigned:</div>
+        <img
+          src="img/smiley.svg.webp"
+          alt="Assigned photo"
+          class="assigned-img"
+        />
+        <div class="assigned-value">${tasks[i].assigned}</div>
+      </div>
+
+      <div class="task-wrapper">
+        <div class="task-parameter">Priority:</div>
+        <div class="priority-value">${tasks[i].priority}</div>
+      </div>
+
+      <div class="task-wrapper">
+        <div class="task-parameter">Due Date:</div>
+        <div class="date-value">${tasks[i].date}</div>
+      </div>
+
+      <div class="tag-edit-wrapper">
+        <button class="btn-tag">+Tag</button>
+        <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
+      </div>
+    </div>`;
+
+      const backLog = document.getElementById("back-log");
+      backLog.innerHTML += markup;
+    }
+  }
+}
+
 const form = document.getElementById("form");
 const addNewTaskBtn = document.getElementById("btn-add-new-task");
 const closeModalBtn = document.getElementById("close-modal");
@@ -15,20 +67,29 @@ function closeModal() {
 
 // Choose one version from dropdown
 
-const janeDoe = document.getElementById("Jane_Doe");
-const johnDoe = document.getElementById("John_Doe");
-const assignedValue = document.getElementById("assigned-wrapper");
+const assignedValue = document.querySelectorAll(".name-value");
+const assignedWrapper = document.getElementById("assigned-wrapper");
 
-janeDoe.addEventListener("click", addValueJaneDoe);
-johnDoe.addEventListener("click", addValueJohnDoe);
+const assignedClick = (event) => {
+  const value = event.target.dataset.name;
+  assignedWrapper.append(value);
+};
 
-function addValueJaneDoe() {
-  assignedValue.textContent = "Jane Doe";
-}
+assignedValue.forEach((name) => {
+  name.addEventListener("click", assignedClick);
+});
 
-function addValueJohnDoe() {
-  assignedValue.textContent = "John Doe";
-}
+const priorityValue = document.querySelectorAll(".priority");
+const priorityWrapper = document.getElementById("priority-wrapper");
+
+const priorityClick = (event) => {
+  const value = event.target.dataset.name;
+  priorityWrapper.append(value);
+};
+
+priorityValue.forEach((priority) => {
+  priority.addEventListener("click", priorityClick);
+});
 
 // Add new task to localStorage and window
 
@@ -37,17 +98,10 @@ const saveTaskBtn = document.getElementById("add-btn-form");
 saveTaskBtn.addEventListener("click", saveNewTask);
 
 function saveNewTask(e) {
-  e.preventDefault();
-
-  const getTasks = localStorage.getItem("tasksBackLog");
-  let tasks;
-  let id;
-
   if (getTasks === null) {
     tasks = [];
     id = 0;
   } else {
-    tasks = JSON.parse(getTasks);
     id = tasks[tasks.length - 1].id;
   }
 
@@ -55,56 +109,63 @@ function saveNewTask(e) {
     id: (id += 1),
     taskTitle: document.getElementById("title").value,
     taskDiscription: document.getElementById("discription").value,
-    assigned: document.getElementById("assigned-wrapper").value,
-    priority: document.getElementById("priority-wrapper").value,
+    assigned: document.getElementById("assigned-wrapper").innerText,
+    priority: document.getElementById("priority-wrapper").innerText,
     date: document.getElementById("date").value,
   });
 
   localStorage.setItem("tasksBackLog", JSON.stringify(tasks));
 
-  for (let i = 0; i < tasks.length; i++) {
-    let ul = document.createElement("ul");
-    let liTitle = document.createElement("li");
-    let liDiscription = document.createElement("li");
-    let liAssigned = document.createElement("li");
-    let liPriority = document.createElement("li");
-    let liDate = document.createElement("li");
-    let liBtnTag = document.createElement("button");
-    let liBtnEdit = document.createElement("button");
+  for (let i = id; i < tasks.length; i++) {
+    const markup = `<div class="task">
+      <div class="btn-close-wrapper">
+        <div class="task-name">${tasks[i].taskTitle}</div>
+        <button id="delete-task" class="button-close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
 
-    liTitle.innerText = tasks[i].taskTitle;
-    liDiscription.innerText = tasks[i].taskDiscription;
-    liAssigned.innerText = tasks[i].assignee;
-    liPriority.innerText = tasks[i].priority;
-    liDate.innerText = tasks[i].date;
-    liBtnTag.innerText = "+Tag";
-    liBtnEdit.innerText = "";
-    liBtnEdit.onclick = function () {
-      editTasks(tasks[i]);
-    };
+      <div class="task-discription">${tasks[i].taskDiscription}</div>
+      <div class="task-wrapper">
+        <div class="task-parameter">Assigned:</div>
+        <img
+          src="img/smiley.svg.webp"
+          alt="Assigned photo"
+          class="assigned-img"
+        />
+        <div class="assigned-value">${tasks[i].assigned}</div>
+      </div>
 
-    ul.appendChild(liTitle);
-    ul.appendChild(liDiscription);
-    ul.appendChild(liAssigned);
-    ul.appendChild(liPriority);
-    ul.appendChild(liDate);
-    ul.appendChild(liBtnTag);
-    ul.appendChild(liBtnEdit);
+      <div class="task-wrapper">
+        <div class="task-parameter">Priority:</div>
+        <div class="priority-value">${tasks[i].priority}</div>
+      </div>
+
+      <div class="task-wrapper">
+        <div class="task-parameter">Due Date:</div>
+        <div class="date-value">${tasks[i].date}</div>
+      </div>
+
+      <div class="tag-edit-wrapper">
+        <button class="btn-tag">+Tag</button>
+        <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
+      </div>
+    </div>`;
 
     const backLog = document.getElementById("back-log");
-    backLog.appendChild(ul);
+    backLog.innerHTML += markup;
   }
+  form.style.display = "none";
+  alert("You added the new task " + tasks[tasks.length - 1].taskTitle + "!");
 }
 
 // Delete Task
 
-// const deleteTask = getElementById("delete-task");
+const deleteBtn = document.querySelectorAll(".btn-close-wrapper .button-close");
 
-// deleteTask.addEventListener("click", deleteTask);
+deleteBtn.forEach((el) => el.addEventListener("click", deleteTask));
 
-// function deleteTask(id) {
-
-// }
+function deleteTask() {}
 
 // Open dropdown with click
 
@@ -116,5 +177,7 @@ function saveNewTask(e) {
 // function openPriority() {
 //   dropDownValue.style.opacity = "1";
 // }
+
+// // e.preventDefault();
 
 // localStorage.clear();
