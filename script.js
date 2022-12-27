@@ -5,7 +5,7 @@ let tasks = JSON.parse(getTasks);
 let id;
 
 function activeTasks() {
-  if (getTasks !== null) {
+  if (getTasks !== null || getTasks === []) {
     markup();
   }
 }
@@ -62,12 +62,18 @@ function markup() {
 // Delete task
 function deleteTask(event) {
   const taskId = parseInt(event.currentTarget.id);
-  // tasks.filter((el) => el.id !== taskId);
 
   for (let i = 0; i < tasks.length; i++) {
     if (taskId === tasks[i].id) {
       const parent = this.parentElement.parentElement;
       parent.parentElement.removeChild(parent);
+      deleteTaskFromArray(tasks, taskId);
+    }
+
+    function deleteTaskFromArray(arr, id) {
+      const objId = arr.findIndex((obj) => obj.id === id);
+      arr.splice(objId, 1);
+      localStorage.setItem("tasksBackLog", JSON.stringify(tasks));
     }
   }
 }
@@ -116,7 +122,7 @@ const saveTaskBtn = document.getElementById("add-btn-form");
 saveTaskBtn.addEventListener("click", saveNewTask);
 
 function saveNewTask(e) {
-  if (getTasks === null) {
+  if (getTasks === null || getTasks === "[]") {
     tasks = [];
     id = 0;
   } else {
