@@ -1,5 +1,17 @@
+// функції, що реагують на якусб подію, прийнато називати з перфікса on або handle і далі назва івенту handleDOMContentLoaded/onDOMContentLoaded
+// або назва може показувати що саме вона робить, тк твоя функція малює таски, то її можна назвати renderTasks
 document.addEventListener("DOMContentLoaded", activeTasks);
 
+
+// 1. В подальшому ти зможеш змінювати статут таски і вони повинні залишатись в локал стораджі,  
+// тому при лоаді треба рендерети всі типи тасок, а не тільки, що відносяться до беклогу
+// 2. З дієслова прийнято називати функції, тому що вони описують якусь дію
+// Змінні зі значенням називають просто за контентом, який і них лежить
+// 3. Ти можеш зкомбінувати зчитування з локал стораджу і парсинг отриманих даних в одному рядку
+// JSON.parse(localStorage.getItem("tasksBackLog")) -> виконная коду тут буде йти зправа наліва, тому спочкату зчитаються 
+// дані з локал стораджу, те, що повернуться з виразу localStorage.getItem("tasksBackLog") відразу піде як аргумент до фугкції
+// JSON.parse(повернене_значення_з_операції_зчитування_з_локал_стораджу)
+// 4. JSON.parse(null) повертає null, тому getTask можна взагалі не використовувати
 const getTasks = localStorage.getItem("tasksBackLog");
 let tasks = JSON.parse(getTasks);
 let id;
@@ -10,7 +22,11 @@ function activeTasks() {
   }
 }
 
+// По сути ця функція робить додавання нових DOM елементів, тому краще придумати назву, яка більш відповідє тому, що 
+// відбувається всередені неї
+// Часто можна зустріти, що подібні функції мають назву починаючи зі слова render, а далі що саме рендериться
 function markup() {
+  // краще уникати скорочень. всім зрозуміло, що i -  це індекс, але taskIndex буде ще зрозуміліше :)
   for (let i = 0; i < tasks.length; i++) {
     const markUp = `<div class="task">
       <div class="btn-close-wrapper">
@@ -47,6 +63,7 @@ function markup() {
       </div>
     </div>`;
 
+    // здається backlog це одне слово
     const backLog = document.getElementById("back-log");
     backLog.innerHTML += markUp;
   }
@@ -61,6 +78,7 @@ function markup() {
 
 // Delete task
 function deleteTask(event) {
+  console.log('delete')
   const taskId = parseInt(event.currentTarget.id);
 
   for (let i = 0; i < tasks.length; i++) {
@@ -124,6 +142,7 @@ saveTaskBtn.addEventListener("click", saveNewTask);
 function saveNewTask(e) {
   if (getTasks === null || getTasks === "[]") {
     tasks = [];
+    // краще нахвати цю змінну taskId
     id = 0;
   } else {
     id = tasks[tasks.length - 1].id;
@@ -140,6 +159,8 @@ function saveNewTask(e) {
 
   localStorage.setItem("tasksBackLog", JSON.stringify(tasks));
 
+  // робата з DOM (додавання, видалення DOM node) з точки зору продктивності дуже затртна, тому треба уникати пермелавання усії сторінки
+  // через це треба переботи це місце таким чином, щоб при додаванні домальовувалась одна таска, а не перемальовувались усі :)
   markup();
 
   form.style.display = "none";
