@@ -1,18 +1,21 @@
 document.addEventListener("DOMContentLoaded", activeTasks);
 
 const getTasks = localStorage.getItem("tasksBackLog");
-let tasks;
+let tasks = JSON.parse(getTasks);
 let id;
 
 function activeTasks() {
-  tasks = JSON.parse(getTasks);
-
   if (getTasks !== null) {
-    for (let i = 0; i < tasks.length; i++) {
-      const markup = `<div class="task">
+    markup();
+  }
+}
+
+function markup() {
+  for (let i = 0; i < tasks.length; i++) {
+    const markUp = `<div class="task">
       <div class="btn-close-wrapper">
         <div class="task-name">${tasks[i].taskTitle}</div>
-        <button id="delete-task" class="button-close">
+        <button id="${tasks[i].id}" class="button-close">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
@@ -44,8 +47,27 @@ function activeTasks() {
       </div>
     </div>`;
 
-      const backLog = document.getElementById("back-log");
-      backLog.innerHTML += markup;
+    const backLog = document.getElementById("back-log");
+    backLog.innerHTML += markUp;
+  }
+  const deleteBtn = document.querySelectorAll(
+    ".btn-close-wrapper .button-close"
+  );
+
+  deleteBtn.forEach((element) => {
+    element.addEventListener("click", deleteTask);
+  });
+}
+
+// Delete task
+function deleteTask(event) {
+  const taskId = parseInt(event.currentTarget.id);
+  // tasks.filter((el) => el.id !== taskId);
+
+  for (let i = 0; i < tasks.length; i++) {
+    if (taskId === tasks[i].id) {
+      const parent = this.parentElement.parentElement;
+      parent.parentElement.removeChild(parent);
     }
   }
 }
@@ -67,29 +89,25 @@ function closeModal() {
 
 // Choose one version from dropdown
 
-const assignedValue = document.querySelectorAll(".name-value");
 const assignedWrapper = document.getElementById("assigned-wrapper");
-
-const assignedClick = (event) => {
-  const value = event.target.dataset.name;
-  assignedWrapper.append(value);
-};
-
-assignedValue.forEach((name) => {
-  name.addEventListener("click", assignedClick);
-});
-
-const priorityValue = document.querySelectorAll(".priority");
 const priorityWrapper = document.getElementById("priority-wrapper");
 
-const priorityClick = (event) => {
-  const value = event.target.dataset.name;
-  priorityWrapper.append(value);
+const MAP_FIELD_NAME_TO_DROPDOWN = {
+  assigned: assignedWrapper,
+  priority: priorityWrapper,
 };
 
-priorityValue.forEach((priority) => {
-  priority.addEventListener("click", priorityClick);
-});
+assignedWrapper.addEventListener("click", handleDropdownClick);
+priorityWrapper.addEventListener("click", handleDropdownClick);
+
+function handleDropdownClick(event) {
+  const currentFiled = event.currentTarget.dataset.fieldName;
+
+  if (event.target.tagName === "LI") {
+    const value = event.target.dataset.name;
+    MAP_FIELD_NAME_TO_DROPDOWN[currentFiled].append(value);
+  }
+}
 
 // Add new task to localStorage and window
 
@@ -116,98 +134,12 @@ function saveNewTask(e) {
 
   localStorage.setItem("tasksBackLog", JSON.stringify(tasks));
 
-<<<<<<< HEAD
-  for (let i = id; i < tasks.length; i++) {
-    const markup = `<div class="task">
-      <div class="btn-close-wrapper">
-        <div class="task-name">${tasks[i].taskTitle}</div>
-        <button id="delete-task" class="button-close">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
+  markup();
 
-      <div class="task-discription">${tasks[i].taskDiscription}</div>
-      <div class="task-wrapper">
-        <div class="task-parameter">Assigned:</div>
-        <img
-          src="img/smiley.svg.webp"
-          alt="Assigned photo"
-          class="assigned-img"
-        />
-        <div class="assigned-value">${tasks[i].assigned}</div>
-      </div>
-
-      <div class="task-wrapper">
-        <div class="task-parameter">Priority:</div>
-        <div class="priority-value">${tasks[i].priority}</div>
-      </div>
-
-      <div class="task-wrapper">
-        <div class="task-parameter">Due Date:</div>
-        <div class="date-value">${tasks[i].date}</div>
-      </div>
-
-      <div class="tag-edit-wrapper">
-        <button class="btn-tag">+Tag</button>
-        <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
-      </div>
-    </div>`;
-=======
-  for (let i = 0; i < tasks.length; i++) {
-    const markup = `<div class="task">
-    <div class="btn-close-wrapper">
-      <div class="task-name">${tasks[i].taskTitle}</div>
-      <button id="delete-task" class="button-close">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-    </div>
-
-    <div class="task-discription">${tasks[i].taskDiscription}</div>
-    <div class="task-wrapper">
-      <div class="task-parameter">Assigned:</div>
-      <img
-        src="img/smiley.svg.webp"
-        alt="Assigned photo"
-        class="assigned-img"
-      />
-      <div class="assigned-value">${tasks[i].assigned}</div>
-    </div>
-
-    <div class="task-wrapper">
-      <div class="task-parameter">Priority:</div>
-      <div class="priority-value">${tasks[i].priority}</div>
-    </div>
-
-    <div class="task-wrapper">
-      <div class="task-parameter">Due Date:</div>
-      <div class="date-value">${tasks[i].date}</div>
-    </div>
-
-    <div class="tag-edit-wrapper">
-      <button class="btn-tag">+Tag</button>
-      <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
-    </div>
-  </div>`;
->>>>>>> eab853fb9573c590a480f4e16251b4e1d6e15edc
-
-    const backLog = document.getElementById("back-log");
-    backLog.innerHTML += markup;
-  }
   form.style.display = "none";
   alert("You added the new task " + tasks[tasks.length - 1].taskTitle + "!");
 }
 
-// Delete Task
-
-<<<<<<< HEAD
-const deleteBtn = document.querySelectorAll(".btn-close-wrapper .button-close");
-
-deleteBtn.forEach((el) => el.addEventListener("click", deleteTask));
-
-function deleteTask() {}
-
-=======
->>>>>>> eab853fb9573c590a480f4e16251b4e1d6e15edc
 // Open dropdown with click
 
 // const dropDownPriority = document.getElementById("priority-wrapper");
@@ -219,6 +151,6 @@ function deleteTask() {}
 //   dropDownValue.style.opacity = "1";
 // }
 
-// // e.preventDefault();
+// e.preventDefault();
 
 // localStorage.clear();
