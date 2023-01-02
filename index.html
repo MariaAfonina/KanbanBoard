@@ -27,114 +27,16 @@
     </header>
 
     <main class="tasks-block">
-      <div id="back-log">
-        <h2 class="task-title">BackLog</h2>
-
-        <div class="task">
-          <div class="btn-close-wrapper">
-            <div class="task-name">Tast title</div>
-            <button class="button-close">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-
-          <div class="task-discription">Task discription</div>
-          <div class="task-wrapper">
-            <div class="task-parameter">Assigned:</div>
-            <img
-              src="img/smiley.svg.webp"
-              alt="Assigned photo"
-              class="assigned-img"
-            />
-            <div class="assigned-value">John Doe</div>
-          </div>
-
-          <div class="task-wrapper">
-            <div class="task-parameter">Priority:</div>
-            <div class="priority-value">Low</div>
-          </div>
-
-          <div class="task-wrapper">
-            <div class="task-parameter">Due Date:</div>
-            <div class="date-value">11/11/2022</div>
-          </div>
-
-          <div class="tag-edit-wrapper">
-            <button class="btn-tag">+Tag</button>
-            <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
-          </div>
-        </div>
+      <div id="backlog" class="backlog" data-field-name="backlog">
+        <h2 class="task-title">Backlog</h2>
       </div>
 
-      <div>
+      <div id="in-progress" class="in-progress" data-field-name="progress">
         <h2 class="task-title">In progress</h2>
-
-        <div class="task">
-          <div class="btn-close-wrapper">
-            <div class="task-name">Tast title</div>
-            <button class="button-close">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-          <div class="task-discription">Task discription</div>
-          <div class="task-wrapper">
-            <div class="task-parameter">Assigned:</div>
-            <img
-              src="img/smiley2.png"
-              alt="Assigned photo"
-              class="assigned-img"
-            />
-            <div class="assigned-value">Jane Doe</div>
-          </div>
-          <div class="task-wrapper">
-            <div class="task-parameter">Priority:</div>
-            <div class="priority-value">Low</div>
-          </div>
-          <div class="task-wrapper">
-            <div class="task-parameter">Due Date:</div>
-            <div class="date-value">11/11/2022</div>
-          </div>
-          <div class="tag-edit-wrapper">
-            <button class="btn-tag">+Tag</button>
-            <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
-          </div>
-        </div>
       </div>
 
-      <div>
+      <div id="done" class="done" data-field-name="done">
         <h2 class="task-title">Done</h2>
-
-        <div class="task">
-          <div class="btn-close-wrapper">
-            <div class="task-name">Tast title</div>
-            <button class="button-close">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-
-          <div class="task-discription">Task discription</div>
-          <div class="task-wrapper">
-            <div class="task-parameter">Assigned:</div>
-            <img
-              src="img/smiley.svg.webp"
-              alt="Assigned photo"
-              class="assigned-img"
-            />
-            <div class="assigned-value">John Doe</div>
-          </div>
-          <div class="task-wrapper">
-            <div class="task-parameter">Priority:</div>
-            <div class="priority-value">Low</div>
-          </div>
-          <div class="task-wrapper">
-            <div class="task-parameter">Due Date:</div>
-            <div class="date-value">11/11/2022</div>
-          </div>
-          <div class="tag-edit-wrapper">
-            <button class="btn-tag">+Tag</button>
-            <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
-          </div>
-        </div>
       </div>
     </main>
 
@@ -173,7 +75,7 @@
             </li>
             <li data-name="John Doe" class="name-value">
               <img
-                src="img/smiley.svg.webp"
+                src="img/smiley2.png"
                 alt="Assigned photo"
                 class="assigned-img"
               />
