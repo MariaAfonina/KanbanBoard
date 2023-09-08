@@ -9,14 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
+      rel="stylesheet" />
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
     <script
       src="https://kit.fontawesome.com/44839b741d.js"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous"></script>
   </head>
   <body>
     <header>
@@ -27,15 +25,18 @@
     </header>
 
     <main class="tasks-block">
-      <div id="backlog" class="backlog" data-field-name="backlog">
+      <div id="backlog" class="backlog" data-task-group-status="tasksBacklog">
         <h2 class="task-title">Backlog</h2>
       </div>
 
-      <div id="in-progress" class="in-progress" data-field-name="progress">
+      <div
+        id="in-progress"
+        class="in-progress"
+        data-task-group-status="tasksInProgress">
         <h2 class="task-title">In progress</h2>
       </div>
 
-      <div id="done" class="done" data-field-name="done">
+      <div id="done" class="done" data-task-group-status="tasksDone">
         <h2 class="task-title">Done</h2>
       </div>
     </main>
@@ -50,17 +51,16 @@
         <label class="add-form-parameter" for="title">Task title</label>
         <input type="text" class="add-form-input" id="title" />
 
-        <label class="add-form-parameter" for="discription"
-          >Task discription</label
+        <label class="add-form-parameter" for="description"
+          >Task description</label
         >
-        <input type="text" class="add-form-input" id="discription" />
+        <input type="text" class="add-form-input" id="description" />
 
         <label class="add-form-parameter">Assignee</label>
         <div
           data-field-name="assigned"
           id="assigned-wrapper"
-          class="dropdown-wrapper"
-        >
+          class="dropdown-wrapper">
           <button class="btn-icon-arrow">
             <i class="icon-arrow fa-solid fa-caret-down"></i>
           </button>
@@ -69,16 +69,14 @@
               <img
                 src="img/smiley.svg.webp"
                 alt="Assigned photo"
-                class="assigned-img"
-              />
+                class="assigned-img" />
               Jane Doe
             </li>
             <li data-name="John Doe" class="name-value">
               <img
                 src="img/smiley2.png"
                 alt="Assigned photo"
-                class="assigned-img"
-              />
+                class="assigned-img" />
               John Doe
             </li>
           </ul>
@@ -88,8 +86,7 @@
         <div
           data-field-name="priority"
           id="priority-wrapper"
-          class="dropdown-wrapper"
-        >
+          class="dropdown-wrapper">
           <button class="btn-icon-arrow">
             <i class="fa-solid fa-caret-down"></i>
           </button>

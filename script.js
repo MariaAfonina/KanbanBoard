@@ -1,12 +1,17 @@
 document.addEventListener("DOMContentLoaded", renderTasks);
 
-let tasksBacklog = JSON.parse(localStorage.getItem("tasksBacklog"));
-let tasksInProgress = JSON.parse(localStorage.getItem("tasksInProgress"));
-let tasksDone = JSON.parse(localStorage.getItem("tasksDone"));
+function getTasksGroup() {
+  return {
+    tasksBacklog: JSON.parse(localStorage.getItem("tasksBacklog")),
+    tasksInProgress: JSON.parse(localStorage.getItem("tasksInProgress")),
+    tasksDone: JSON.parse(localStorage.getItem("tasksDone")),
+  };
+}
 
 let taskId;
 
 function renderTasks() {
+  const { tasksBacklog, tasksInProgress, tasksDone } = getTasksGroup();
   if (tasksBacklog !== null || tasksInProgress !== null || tasksDone !== null) {
     renderAllTask();
   }
@@ -21,7 +26,7 @@ function createTaskMarkup(task) {
     </button>
   </div>
 
-  <div class="task-discription">${task.taskDiscription}</div>
+  <div class="task-description">${task.taskDescription}</div>
   <div class="task-wrapper">
     <div class="task-parameter">Assigned:</div>
     <img
@@ -49,33 +54,52 @@ function createTaskMarkup(task) {
 </div>`;
 }
 
+function renderTaskGroup(group, groupId) {
+  if (group !== null && group.length !== 0) {
+    for (let taskIndex = 0; taskIndex < group.length; taskIndex++) {
+      const taskMarkup = createTaskMarkup(group[taskIndex]);
+
+      const groupContainer = document.getElementById(groupId);
+      groupContainer.innerHTML += taskMarkup;
+    }
+  }
+  if (group !== null && group.length !== 0) {
+    for (let taskIndex = 0; taskIndex < group.length; taskIndex++) {
+      const taskId = document.getElementById(group[taskIndex].id);
+      const taskPriorityValue = group[taskIndex].priority;
+      const taskPriority = taskId.children[3].children[1];
+
+      if (taskPriorityValue === "High") {
+        taskPriority.classList.add("priority-value-high");
+      }
+      if (taskPriorityValue === "Medium") {
+        taskPriority.classList.add("priority-value-medium");
+      }
+      if (taskPriorityValue === "Low") {
+        taskPriority.classList.add("priority-value-low");
+      }
+
+      const taskAssignedValue = group[taskIndex].assigned;
+      const taskAssigned = taskId.children[2].children[1];
+      console.log(taskAssignedValue);
+
+      if (taskAssignedValue === "Jane Doe") {
+        taskAssigned.src = "img/smiley.svg.webp";
+      }
+      if (taskAssignedValue === "John Doe") {
+        taskAssigned.src = "img/smiley2.png";
+      }
+    }
+  }
+}
+
 function renderAllTask() {
-  if (tasksBacklog !== null && tasksBacklog.length !== 0) {
-    for (let taskIndex = 0; taskIndex < tasksBacklog.length; taskIndex++) {
-      const drawBacklog = createTaskMarkup(tasksBacklog[taskIndex]);
+  const { tasksBacklog, tasksInProgress, tasksDone } = getTasksGroup();
 
-      const backlog = document.getElementById("backlog");
-      backlog.innerHTML += drawBacklog;
-    }
-  }
+  renderTaskGroup(tasksBacklog, "backlog");
+  renderTaskGroup(tasksInProgress, "in-progress");
+  renderTaskGroup(tasksDone, "done");
 
-  if (tasksInProgress !== null && tasksInProgress.length !== 0) {
-    for (let taskIndex = 0; taskIndex < tasksInProgress.length; taskIndex++) {
-      const drawInProgress = createTaskMarkup(tasksInProgress[taskIndex]);
-
-      const inProgress = document.getElementById("in-progress");
-      inProgress.innerHTML += drawInProgress;
-    }
-  }
-
-  if (tasksDone !== null && tasksDone.length !== 0) {
-    for (let taskIndex = 0; taskIndex < tasksDone.length; taskIndex++) {
-      const drawDone = createTaskMarkup(tasksDone[taskIndex]);
-
-      const done = document.getElementById("done");
-      done.innerHTML += drawDone;
-    }
-  }
   const getBtnDelete = document.querySelectorAll(
     ".btn-close-wrapper .button-close"
   );
@@ -116,6 +140,10 @@ function renderAllTask() {
 
     function drag(event) {
       event.dataTransfer.setData("id", event.target.id);
+      event.dataTransfer.setData(
+        "data-task-group-status",
+        event.target.parentElement.dataset.taskGroupStatus
+      );
     }
 
     zoneBacklog.ondrop = drop;
@@ -123,173 +151,142 @@ function renderAllTask() {
     zoneDone.ondrop = drop;
 
     function drop(event) {
-      const itemId = event.dataTransfer.getData("id");
+      const itemId = Number(event.dataTransfer.getData("id"));
       event.target.append(document.getElementById(itemId));
-    }
 
-    changePlaceInArray(taskId);
-  }
-  function changePlaceInArray(task) {
-    for (let taskIndex = 0; taskIndex < tasksBacklog.length; taskIndex++) {
-      if (task === tasksBacklog[taskIndex].id) {
-        // deleteTaskFromArray(tasksBacklog, taskId);
-      }
+      const previousGroupName = event.dataTransfer.getData(
+        "data-task-group-status"
+      );
+      const nextGroupName = event.target.dataset.taskGroupStatus;
+
+      const previousArray = JSON.parse(localStorage.getItem(previousGroupName));
+      const nextGroupArray =
+        JSON.parse(localStorage.getItem(nextGroupName)) || [];
+
+      const taskPush = previousArray.find((task) => task.id === itemId);
+      nextGroupArray.push(taskPush);
+
+      deleteTaskFromArray(previousArray, itemId);
+
+      localStorage.setItem(previousGroupName, JSON.stringify(previousArray));
+      localStorage.setItem(nextGroupName, JSON.stringify(nextGroupArray));
     }
   }
 }
 
 // Delete task
-function deleteTask(event) {
-  const taskId = parseInt(event.currentTarget.parentElement.parentElement.id);
 
-  for (let taskIndex = 0; taskIndex < tasksBacklog.length; taskIndex++) {
-    if (taskId === tasksBacklog[taskIndex].id) {
-      const parent = this.parentElement.parentElement;
-      parent.parentElement.removeChild(parent);
-      deleteTaskFromArray(tasksBacklog, taskId);
-    }
+function deleteTaskFromArray(arr, id, groupName) {
+  const taskId = arr.findIndex((task) => task.id === id);
+  arr.splice(taskId, 1);
+
+  if (groupName === "backlog") {
+    localStorage.setItem("tasksBacklog", JSON.stringify(arr));
   }
 
-  if (tasksInProgress !== null && tasksInProgress.length !== 0) {
-    for (let taskIndex = 0; taskIndex < tasksInProgress.length; taskIndex++) {
-      if (taskId === tasksInProgress[taskIndex].id) {
-        const parent = this.parentElement.parentElement;
-        parent.parentElement.removeChild(parent);
-        deleteTaskFromArray(tasksInProgress, taskId);
-      }
-    }
+  if (groupName === "inProgress") {
+    localStorage.setItem("tasksInProgress", JSON.stringify(arr));
   }
-  if (tasksDone !== null && tasksDone.length !== 0) {
-    for (let taskIndex = 0; taskIndex < tasksDone.length; taskIndex++) {
-      if (taskId === tasksDone[taskIndex].id) {
-        const parent = this.parentElement.parentElement;
+
+  if (groupName === "done") {
+    localStorage.setItem("tasksDone", JSON.stringify(arr));
+  }
+}
+
+function deleteTaskGroup(taskId, group, parent, groupName) {
+  if (group !== null && group.length !== 0) {
+    for (let taskIndex = 0; taskIndex < group.length; taskIndex++) {
+      if (taskId === group[taskIndex].id) {
         parent.parentElement.removeChild(parent);
-        deleteTaskFromArray(tasksDone, taskId);
+        deleteTaskFromArray(group, taskId, groupName);
       }
     }
   }
 }
 
-function deleteTaskFromArray(arr, id) {
-  const taskId = arr.findIndex((task) => task.id === id);
-  arr.splice(taskId, 1);
-  localStorage.setItem("tasksBacklog", JSON.stringify(tasksBacklog));
-  localStorage.setItem("tasksInProgress", JSON.stringify(tasksInProgress));
-  localStorage.setItem("tasksDone", JSON.stringify(tasksDone));
+function deleteTask(event) {
+  const taskId = parseInt(event.currentTarget.parentElement.parentElement.id);
+  const parent = this.parentElement.parentElement;
+
+  const { tasksBacklog, tasksInProgress, tasksDone } = getTasksGroup();
+
+  deleteTaskGroup(taskId, tasksBacklog, parent, "backlog");
+  deleteTaskGroup(taskId, tasksInProgress, parent, "inProgress");
+  deleteTaskGroup(taskId, tasksDone, parent, "done");
 }
 
 //Update task
+
+function saveUpdateValue(group, updateTaskId, groupName) {
+  if (group !== null && group.length !== 0) {
+    for (let taskId = 0; taskId < group.length; taskId++) {
+      if (updateTaskId === group[taskId].id) {
+        group[taskId].taskTitle = document.getElementById("title").value;
+        group[taskId].taskDescription =
+          document.getElementById("description").value;
+        group[taskId].assigned =
+          document.getElementById("assigned-wrapper").innerText;
+        group[taskId].priority =
+          document.getElementById("priority-wrapper").innerText;
+        group[taskId].date = document.getElementById("date").value;
+      }
+    }
+  }
+  if (groupName === "backlog") {
+    localStorage.setItem("tasksBacklog", JSON.stringify(group));
+  }
+  if (groupName === "inProgress") {
+    localStorage.setItem("tasksInProgress", JSON.stringify(group));
+  }
+  if (groupName === "done") {
+    localStorage.setItem("tasksDone", JSON.stringify(group));
+  }
+}
+
+function updateTask(updateTaskId) {
+  return function () {
+    const { tasksBacklog, tasksInProgress, tasksDone } = getTasksGroup();
+    saveUpdateValue(tasksBacklog, updateTaskId, "backlog");
+    saveUpdateValue(tasksInProgress, updateTaskId, "inProgress");
+    saveUpdateValue(tasksDone, updateTaskId, "done");
+  };
+}
+
+function getValueToUpdate(group, updateTaskId) {
+  if (group !== null && group.length !== 0) {
+    for (let taskId = 0; taskId < group.length; taskId++) {
+      if (updateTaskId === group[taskId].id) {
+        document.getElementById("title").value = group[taskId].taskTitle;
+        document.getElementById("description").value =
+          group[taskId].taskDescription;
+        document
+          .getElementById("assigned-wrapper")
+          .append(group[taskId].assigned);
+        document
+          .getElementById("priority-wrapper")
+          .append(group[taskId].priority);
+        document.getElementById("date").value = group[taskId].date;
+      }
+    }
+  }
+}
 
 function getModalToUpdate(event) {
   const updateTaskId = parseInt(
     event.currentTarget.parentElement.parentElement.id
   );
 
-  for (let taskId = 0; taskId < tasksBacklog.length; taskId++) {
-    if (updateTaskId === tasksBacklog[taskId].id) {
-      document.getElementById("title").value = tasksBacklog[taskId].taskTitle;
-      document.getElementById("discription").value =
-        tasksBacklog[taskId].taskDiscription;
-      document
-        .getElementById("assigned-wrapper")
-        .append(tasksBacklog[taskId].assigned);
-      document
-        .getElementById("priority-wrapper")
-        .append(tasksBacklog[taskId].priority);
-      document.getElementById("date").value = tasksBacklog[taskId].date;
-    }
-  }
+  const { tasksBacklog, tasksInProgress, tasksDone } = getTasksGroup();
 
-  if (tasksInProgress !== null && tasksInProgress.length !== 0) {
-    for (let taskId = 0; taskId < tasksInProgress.length; taskId++) {
-      if (updateTaskId === tasksInProgress[taskId].id) {
-        document.getElementById("title").value =
-          tasksInProgress[taskId].taskTitle;
-        document.getElementById("discription").value =
-          tasksInProgress[taskId].taskDiscription;
-        document
-          .getElementById("assigned-wrapper")
-          .append(tasksInProgress[taskId].assigned);
-        document
-          .getElementById("priority-wrapper")
-          .append(tasksInProgress[taskId].priority);
-        document.getElementById("date").value = tasksInProgress[taskId].date;
-      }
-    }
-  }
-
-  if (tasksDone !== null && tasksDone.length !== 0) {
-    for (let taskId = 0; taskId < tasksDone.length; taskId++) {
-      if (updateTaskId === tasksDone[taskId].id) {
-        document.getElementById("title").value = tasksDone[taskId].taskTitle;
-        document.getElementById("discription").value =
-          tasksDone[taskId].taskDiscription;
-        document
-          .getElementById("assigned-wrapper")
-          .append(tasksDone[taskId].assigned);
-        document
-          .getElementById("priority-wrapper")
-          .append(tasksDone[taskId].priority);
-        document.getElementById("date").value = tasksDone[taskId].date;
-      }
-    }
-  }
+  getValueToUpdate(tasksBacklog, updateTaskId);
+  getValueToUpdate(tasksInProgress, updateTaskId);
+  getValueToUpdate(tasksDone, updateTaskId);
 
   form.style.display = "block";
 
   const changeBtnAddToUpdate = document.querySelector(".add-button");
   changeBtnAddToUpdate.innerHTML = "Change";
-  changeBtnAddToUpdate.addEventListener("click", updateTask);
-
-  function updateTask() {
-    for (let taskId = 0; taskId < tasksBacklog.length; taskId++) {
-      if (updateTaskId === tasksBacklog[taskId].id) {
-        tasksBacklog[taskId].taskTitle = document.getElementById("title").value;
-        tasksBacklog[taskId].taskDiscription =
-          document.getElementById("discription").value;
-        tasksBacklog[taskId].assigned =
-          document.getElementById("assigned-wrapper").innerText;
-        tasksBacklog[taskId].priority =
-          document.getElementById("priority-wrapper").innerText;
-        tasksBacklog[taskId].date = document.getElementById("date").value;
-        localStorage.setItem("tasksBacklog", JSON.stringify(tasksBacklog));
-      }
-    }
-    if (tasksInProgress !== null && tasksInProgress.length !== 0) {
-      for (let taskId = 0; taskId < tasksInProgress.length; taskId++) {
-        if (updateTaskId === tasksInProgress[taskId].id) {
-          tasksInProgress[taskId].taskTitle =
-            document.getElementById("title").value;
-          tasksInProgress[taskId].taskDiscription =
-            document.getElementById("discription").value;
-          tasksInProgress[taskId].assigned =
-            document.getElementById("assigned-wrapper").innerText;
-          tasksInProgress[taskId].priority =
-            document.getElementById("priority-wrapper").innerText;
-          tasksInProgress[taskId].date = document.getElementById("date").value;
-          localStorage.setItem(
-            "tasksInProgress",
-            JSON.stringify(tasksInProgress)
-          );
-        }
-      }
-    }
-    if (tasksDone !== null && tasksDone.length !== 0) {
-      for (let taskId = 0; taskId < tasksDone.length; taskId++) {
-        if (updateTaskId === tasksDone[taskId].id) {
-          tasksDone[taskId].taskTitle = document.getElementById("title").value;
-          tasksDone[taskId].taskDiscription =
-            document.getElementById("discription").value;
-          tasksDone[taskId].assigned =
-            document.getElementById("assigned-wrapper").innerText;
-          tasksDone[taskId].priority =
-            document.getElementById("priority-wrapper").innerText;
-          tasksDone[taskId].date = document.getElementById("date").value;
-          localStorage.setItem("tasksDone", JSON.stringify(tasksDone));
-        }
-      }
-    }
-  }
+  changeBtnAddToUpdate.addEventListener("click", updateTask(updateTaskId));
 }
 
 const form = document.getElementById("form");
@@ -335,6 +332,7 @@ function handleDropdownClick(event) {
 // Add new task to localStorage and window
 
 function saveNewTask() {
+  let { tasksBacklog } = getTasksGroup();
   if (tasksBacklog === null || tasksBacklog.length === 0) {
     tasksBacklog = [];
     taskId = 0;
@@ -345,7 +343,7 @@ function saveNewTask() {
   tasksBacklog.push({
     id: (taskId += 1),
     taskTitle: document.getElementById("title").value,
-    taskDiscription: document.getElementById("discription").value,
+    taskDescription: document.getElementById("description").value,
     assigned: document.getElementById("assigned-wrapper").innerText,
     priority: document.getElementById("priority-wrapper").innerText,
     date: document.getElementById("date").value,
@@ -361,18 +359,3 @@ function saveNewTask() {
       "!"
   );
 }
-
-// Open dropdown with click
-
-// const dropDownPriority = document.getElementById("priority-wrapper");
-// const dropDownValue = document.getElementById("priority-value");
-
-// dropDownPriority.addEventListener("click", openPriority);
-
-// function openPriority() {
-//   dropDownValue.style.opacity = "1";
-// }
-
-// e.preventDefault();
-
-// localStorage.clear();

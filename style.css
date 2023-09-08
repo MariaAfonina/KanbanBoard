@@ -122,13 +122,29 @@ header {
 }
 
 .priority-value {
-  color: #0eacc1;
   font-weight: 700;
   font-size: 12px;
   padding: 2px 8px;
-  background: rgba(14, 172, 193, 0.1);
   border-radius: 100px;
   text-align: center;
+}
+
+.priority-value-high {
+  color: #ff3d00;
+  font-weight: 700;
+  background: rgba(255, 61, 0, 0.1);
+}
+
+.priority-value-medium {
+  color: #c18f0e;
+  font-weight: 700;
+  background: rgba(255, 184, 0, 0.1);
+}
+
+.priority-value-low {
+  color: #0eacc1;
+  font-weight: 700;
+  background: rgba(14, 172, 193, 0.1);
 }
 
 .date-value {
@@ -273,21 +289,18 @@ header {
 .dropdown-value .high:hover {
   color: #ff3d00;
   font-weight: 700;
-  font-size: 12px;
   background: rgba(255, 61, 0, 0.1);
 }
 
 .dropdown-value .medium:hover {
   color: #c18f0e;
   font-weight: 700;
-  font-size: 12px;
   background: rgba(255, 184, 0, 0.1);
 }
 
 .dropdown-value .low:hover {
   color: #0eacc1;
   font-weight: 700;
-  font-size: 12px;
   background: rgba(14, 172, 193, 0.1);
 }
 
